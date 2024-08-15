@@ -104,7 +104,7 @@ class CatalogServiceApplicationTests {
                 .exchange()
                 .expectStatus().isNotFound()
                 .expectBody(String.class).value(errorMessage ->
-                    assertThat(errorMessage).isEqualTo("The book with ISBN " + bookIsbn + " was not found.")
+                        assertThat(errorMessage).isEqualTo("The book with ISBN " + bookIsbn + " was not found.")
                 );
     }
 
