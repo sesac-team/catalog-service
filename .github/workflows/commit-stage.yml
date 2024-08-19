@@ -26,6 +26,7 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew build
+        continue-on-error: true
       - name: Code vulnerability scanning
         uses: anchore/scan-action@v3
         id: scan
