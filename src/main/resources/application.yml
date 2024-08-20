@@ -17,7 +17,8 @@ spring:
     import: "optional:configserver:"
   cloud:
     config:
-      uri: http://localhost:8888
+      # uri: http://localhost:8888
+      uri: http://config-service:8888
       request-connect-timeout: 5000 # 5s
       request-read-timeout: 5000 # 5s
       fail-fast: false # In production, set to true
@@ -29,7 +30,8 @@ spring:
   datasource:
     username: user
     password: password
-    url: jdbc:postgresql://localhost:5432/polardb_catalog
+    url: jdbc:postgresql://polar-postgres:5432/polardb_catalog
+    # url: jdbc:postgresql://localhost:5432/polardb_catalog
     hikari:
       connection-timeout: 2000 #ms
       maximum-pool-size: 5
@@ -37,7 +39,10 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/realms/PolarBookshop
+          issuer-uri: http://host.docker.internal:8080/realms/PolarBookshop
+          # issuer-uri: http://localhost:8080/realms/PolarBookshop
+
+
 
 management:
   endpoints:
