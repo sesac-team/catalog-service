@@ -1,5 +1,5 @@
 package com.polarbookshop.catalogservice.config;
-
+//
 import java.util.Optional;
 
 import org.springframework.context.annotation.Bean;
