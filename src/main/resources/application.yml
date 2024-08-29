@@ -17,7 +17,7 @@ spring:
     import: "optional:configserver:"
   cloud:
     config:
-      uri: http://config-service:8888 # config-service를 Kubernetes에서 사용할 수 있는 이름으로 변경
+      uri: http://localhost:8888
       request-connect-timeout: 5000 # 5s
       request-read-timeout: 5000 # 5s
       fail-fast: false # In production, set to true
@@ -29,7 +29,7 @@ spring:
   datasource:
     username: user
     password: password
-    url: jdbc:postgresql://polar-postgres:5432/polardb_catalog # PostgreSQL 서비스 이름 사용
+    url: jdbc:postgresql://localhost:5432/polardb_catalog
     hikari:
       connection-timeout: 2000 #ms
       maximum-pool-size: 5
@@ -37,13 +37,36 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://polar-keycloak:8080/realms/PolarBookshop # Keycloak 서비스 이름 사용
+          issuer-uri: http://localhost:8080/realms/PolarBookshop
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
+
+info:
+  system: Polar Bookshop
 
 management:
   endpoints:
     web:
       exposure:
-        include: refresh
+        include: configprops, env, flyway, health, heapdump, info, loggers, mappings, prometheus
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+      probes:
+        enabled: true
+  info:
+    env:
+      enabled: true
+    java:
+      enabled: true
+    os:
+      enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
 
 polar:
   greeting: Welcome to the local book catalog!
