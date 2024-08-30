@@ -7,8 +7,10 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.annotation.Version;
 
@@ -39,9 +41,10 @@ public record Book (
         @LastModifiedDate
         Instant lastModifiedDate,
 
-        // Removed @CreatedBy and @LastModifiedBy annotations
+        @CreatedBy
         String createdBy,
 
+        @LastModifiedBy
         String lastModifiedBy,
 
         @Version
@@ -50,8 +53,7 @@ public record Book (
 ){
 
         public static Book of(String isbn, String title, String author, Double price, String publisher) {
-                // Manually set createdBy and lastModifiedBy to default values or null
-                return new Book(null, isbn, title, author, price, publisher, null, null, "system", "system", 0);
+                return new Book(null, isbn, title, author, price, publisher, null, null, null, null, 0);
         }
 
 }
