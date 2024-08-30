@@ -7,10 +7,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 
-import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.annotation.Version;
 
@@ -20,7 +18,7 @@ public record Book (
         Long id,
 
         @NotBlank(message = "The book ISBN must be defined.")
-		@Pattern(regexp = "^([0-9]{10}|[0-9]{13})$", message = "The ISBN format must be valid.")
+        @Pattern(regexp = "^([0-9]{10}|[0-9]{13})$", message = "The ISBN format must be valid.")
         String isbn,
 
         @NotBlank(message = "The book title must be defined.")
@@ -41,10 +39,9 @@ public record Book (
         @LastModifiedDate
         Instant lastModifiedDate,
 
-        @CreatedBy
+        // Removed @CreatedBy and @LastModifiedBy annotations
         String createdBy,
 
-        @LastModifiedBy
         String lastModifiedBy,
 
         @Version
@@ -53,7 +50,8 @@ public record Book (
 ){
 
         public static Book of(String isbn, String title, String author, Double price, String publisher) {
-                return new Book(null, isbn, title, author, price, publisher, null, null, null, null, 0);
+                // Manually set createdBy and lastModifiedBy to default values or null
+                return new Book(null, isbn, title, author, price, publisher, null, null, "system", "system", 0);
         }
 
 }
