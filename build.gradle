@@ -23,13 +23,13 @@ repositories {
 ext {
 	set('otelVersion', "2.4.0")
 	set('springCloudVersion', "2023.0.2")
-	// set('testKeycloakVersion', "3.3.1") // Keycloak 의존성 제거를 위해 주석 처리
+	set('testKeycloakVersion', "3.3.1")
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
-	// implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server' // OAuth2 관련 의존성 제거를 위해 주석 처리
+	// implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server' // 제거됨
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.cloud:spring-cloud-starter-config'
@@ -44,10 +44,10 @@ dependencies {
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.boot:spring-boot-starter-webflux'
-	// testImplementation 'org.springframework.security:spring-security-test' // Spring Security 테스트 관련 의존성 제거를 위해 주석 처리
-	// testImplementation 'org.testcontainers:keycloak' // Keycloak 테스트 컨테이너 의존성 제거를 위해 주석 처리
+	// testImplementation 'org.springframework.security:spring-security-test' // 제거됨
 	testImplementation 'org.testcontainers:junit-jupiter'
 	testImplementation 'org.testcontainers:postgresql'
+	testImplementation "com.github.dasniko:testcontainers-keycloak:${testKeycloakVersion}"
 }
 
 dependencyManagement {
