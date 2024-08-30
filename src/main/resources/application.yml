@@ -17,7 +17,7 @@ spring:
     import: "optional:configserver:"
   cloud:
     config:
-      uri: http://config-service:80 # config-service를 Kubernetes에서 사용할 수 있는 이름으로 변경
+      uri: http://localhost:8888
       request-connect-timeout: 5000 # 5s
       request-read-timeout: 5000 # 5s
       fail-fast: false # In production, set to true
@@ -29,15 +29,10 @@ spring:
   datasource:
     username: user
     password: password
-    url: jdbc:postgresql://polar-postgres:80/polardb_catalog # PostgreSQL 서비스 이름 사용
+    url: jdbc:postgresql://localhost:5432/polardb_catalog
     hikari:
       connection-timeout: 2000 #ms
       maximum-pool-size: 5
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://polar-keycloak:80/realms/PolarBookshop # Keycloak 서비스 이름 사용
 
 management:
   endpoints:
