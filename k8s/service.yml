@@ -4,11 +4,16 @@ metadata:
   name: catalog-service
   labels:
     app: catalog-service
+    service: catalog-service
+    version: catalog
 spec:
   type: ClusterIP
   selector:
     app: catalog-service
+    service: catalog-service
+    version: catalog
   ports:
     - protocol: TCP
       port: 80
+      name: http
       targetPort: 9001

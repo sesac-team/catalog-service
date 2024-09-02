@@ -4,15 +4,21 @@ metadata:
   name: catalog-service
   labels:
     app: catalog-service
+    service: catalog-service
+    version: catalog
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: catalog-service
+      service: catalog-service
+      version: catalog
   template:
     metadata:
       labels:
         app: catalog-service
+        service: catalog-service
+        version: catalog
     spec:
       containers:
         - name: catalog-service
@@ -21,7 +27,7 @@ spec:
           lifecycle:
             preStop:
               exec:
-                command: [ "sh", "-c", "sleep 5" ]
+                command: ["sh", "-c", "sleep 5"]
           ports:
             - containerPort: 9001
           env:
@@ -33,5 +39,8 @@ spec:
               value: jdbc:postgresql://polar-postgres/polardb_catalog
             - name: SPRING_PROFILES_ACTIVE
               value: testdata
-            - name: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI
-              value: http://polar-keycloak/realms/PolarBookshop
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_ISSUER_URI
+              value: http://ab1499ce512714319a3df12ec8b08c1c-941973363.ap-northeast-2.elb.amazonaws.com/realms/PolarBookshop
+
+            # - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_ISSUER_URI
+            #   value: http://polar-keycloak/realms/PolarBookshop
