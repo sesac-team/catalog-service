@@ -44,7 +44,7 @@ spring:
     sampler:
       probability: 1.0 # 모든 요청을 샘플링 (프로덕션 환경에서는 이 값을 낮출 수 있습니다)
   zipkin:
-    base-url: http://zipkin-service:9411 # Zipkin 서버의 URL을 설정합니다
+    base-url: http://zipkin-service:80 # Zipkin 서버의 URL을 설정합니다
     sender:
       type: web # HTTP를 통해 Zipkin에 데이터를 전송합니다
 
